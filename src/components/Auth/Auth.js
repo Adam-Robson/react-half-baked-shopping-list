@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import './Auth.css';
@@ -10,7 +10,7 @@ export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const submitAuth = async () => {
     const userResponse = await authUser(email, password);
@@ -18,6 +18,10 @@ export default function Auth() {
     setEmail('');
     setPassword('');
   };
+
+  if (user) {
+    return <Redirect to="/Items" />;
+  }
 
   return (
     <div className="auth box">
