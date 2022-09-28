@@ -6,6 +6,7 @@ import Items from './components/Items/Items';
 import backgroundImage from './supermarket.jpeg';
 
 function App() {
+
   return (
     <div className="App" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <Header />
