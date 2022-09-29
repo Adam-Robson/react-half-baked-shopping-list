@@ -16,6 +16,9 @@ function App() {
         <Route exact path="/">
           <Redirect to="/auth/sign-up" />
         </Route>
+        <Route path="*" >
+          <Redirect to="/auth/sign-in" />
+        </Route>
       </Switch>
     </div>
   );

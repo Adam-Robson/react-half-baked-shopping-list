@@ -48,7 +48,8 @@ export default function Items() {
             <input
               className="m-1"
               type="checkbox"
-              checked={item.purchased}
+              checked={ item.purchased }
+              readOnly
               onClick={() => handleClick(item)}
             />
             {item.qty} {item.name}

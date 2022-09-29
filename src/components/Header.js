@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { useContext } from 'react';
+import { UserContext } from '../../src/context/UserContext';
 import { signOut } from '../services/auth';
+import setUser from '../components/Auth/Auth';
 
 export default function Header() {
   const [isActive, setIsActive] = useState(false);
-  // TODO -- replace this user with the user from context
-  const user = { email: 'this is a placeholder' };
+
+  const { user } = useContext(UserContext);
 
   const handleLogout = async () => {
     try {
       await signOut();
-      // TODO -- set the user to null after logout
+      setUser(null);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e.message);

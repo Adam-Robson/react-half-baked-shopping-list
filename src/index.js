@@ -5,14 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bulma/css/bulma.min.css';
 import { BrowserRouter } from 'react-router-dom';
-
-// TODO -- make sure to wrap your app in your User provider!
+import { UserProvider } from '../src/context/UserContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
