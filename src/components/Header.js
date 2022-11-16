@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../src/context/UserContext';
 import { signOut } from '../services/auth';
-import setUser from '../components/Auth/Auth';
 
 export default function Header() {
   const [isActive, setIsActive] = useState(false);
 
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const handleLogout = async () => {
     try {

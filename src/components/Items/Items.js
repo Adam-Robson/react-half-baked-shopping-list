@@ -12,6 +12,7 @@ export default function Items() {
   const { items, setItems } = useItems();
 
   const { user } = useContext(UserContext);
+  
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }
