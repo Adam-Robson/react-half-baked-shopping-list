@@ -2,16 +2,16 @@ import { NavLink, Redirect, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import './Auth.css';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { authUser } from '../../services/auth';
-import { UserContext } from '../../context/UserContext';
+import { useUserContext } from '../../context/useUserContext';
 
 export default function Auth() {
   const { type } = useParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useUserContext();
 
   const submitAuth = async () => {
     const userResponse = await authUser(email, password, type);
@@ -23,31 +23,17 @@ export default function Auth() {
   if (user) {
     return <Redirect to="/Items" />;
   }
-
   return (
-    <div className="auth box">
-      <nav className="panel is-success">
-        <div className="panel-heading">Welcome to Alchemy Shopping List</div>
-        <div className="panel-tabs">
-          <NavLink
-            className="is-size-6 has-text-weight-bold"
-            to="/auth/sign-in"
-            activeClassName="is-active"
-          >
-            Sign In
-          </NavLink>
-          <NavLink
-            className="is-size-6 has-text-weight-bold"
-            to="/auth/sign-up"
-            activeClassName="is-active"
-          >
-            Sign Up
-          </NavLink>
+    <div className="auth">
+      <nav className="panel">
+        <div className="heading">welcome</div>
+        <div className="panel">
+
         </div>
-        <div className="panel-block">
+        <div className="box">
           <div className="field">
-            <label className="label">Email</label>
-            <div className="control has-icons-left has-icons-right">
+            <label className="label">email</label>
+            <div className="control">
               <input
                 className="input"
                 type="email"
@@ -55,32 +41,37 @@ export default function Auth() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <span className="icon is-small is-left">
-                <FontAwesomeIcon icon={faEnvelope} />
+              <span className="icon">
+                <FontAwesomeIcon className="icon" icon={faEnvelope} />
               </span>
             </div>
           </div>
           <div className="field">
-            <label className="label">Password</label>
-            <div className="control has-icons-left has-icons-right">
+            <label className="label">password</label>
+            <div className="control">
               <input
                 className="input"
                 type="password"
-                placeholder="Password"
+                placeholder="********"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <span className="icon is-small is-left">
-                <FontAwesomeIcon icon={faLock} />
+              <span className="icon">
+                <FontAwesomeIcon className="icon" icon={ faLock } />
               </span>
             </div>
           </div>
         </div>
         <div className="control">
-          <button onClick={submitAuth} className="button is-success mt-2 mb-2">
+          <button onClick={submitAuth} className="submit">
             Submit
           </button>
         </div>
+        {
+          type === 'sign-in' ?
+            <div><NavLink className='link-nav' to='/auth/sign-up'>sign-up instead?</NavLink></div> :
+            <div><NavLink className='link-nav' to='/auth/sign-in'>sign-in instead?</NavLink></div>
+        }
       </nav>
     </div>
   );
