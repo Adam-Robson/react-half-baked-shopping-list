@@ -29,13 +29,18 @@
   display: block;
   float: right;
   font-size: small;
+  position: relative;
+  bottom: 50px;
 }
 
-.button {
-  display: block;
+.signout {
+  display:block;
   float: right;
+  margin-right: 25px;
+  font-size: small;
   position: relative;
-  bottom: 19px;
+  bottom: 30px;
+  color: #394648;
 }
 
 .auth {
@@ -47,7 +52,7 @@
   margin: 10px auto;
 }
 
-.box {
+.things {
   display: flex;
   flex-direction: column;
 }
@@ -79,4 +84,18 @@ margin-left: 5px;
 margin-top: 25px;
 margin-bottom: 25px;
 font-size: small;
+}
+
+
+.item-input {
+  margin: 10px;
+}
+
+.checkbox-input {
+  margin: 10px;
+}
+
+.qty-input {
+  margin: 10px;
+
 }

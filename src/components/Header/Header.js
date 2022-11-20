@@ -34,11 +34,10 @@ export default function Header() {
       <div className="navbar-item">
         { user && (
           <>
-            <button className="button" onClick={ handleLogout }>
+            <button className="signout" onClick={ handleLogout }>
                   Sign Out
             </button>
             <div className="greeting">hello { user.email }</div>
-
           </>
         ) }
       </div>

@@ -41,12 +41,12 @@ export default function Items() {
   };
 
   return (
-    <div className="box m-5">
+    <section className="things">
       {items.map((item) => (
         <div key={item.id}>
           <label className="checkbox">
             <input
-              className="m-1"
+              className="checkbox-input"
               type="checkbox"
               checked={ item.purchased }
               readOnly
@@ -56,25 +56,25 @@ export default function Items() {
           </label>
         </div>
       ))}
-      <div className="field is-grouped m-2">
+      <div className="field">
         <input
-          className="input m-2"
+          className="item-input"
           type="text"
           placeholder="new item"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <input
-          className="input m-2"
+          className="qty-input"
           type="number"
           placeholder="qty"
           value={qty}
           onChange={(e) => setQty(Number(e.target.value))}
         />
-        <button className="button is-primary m-2" onClick={handleNewItem}>
+        <button className="addItem" onClick={handleNewItem}>
           Add
         </button>
       </div>
-    </div>
+    </section>
   );
 }
