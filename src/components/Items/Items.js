@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useItems } from '../../hooks/useItems';
 import { toggleListItem, createListItem } from '../../services/items';
+import { useUserContext } from '../../context/useUserContext';
+import { Redirect } from 'react-router-dom';
 
 export default function Items() {
   const [name, setName] = useState('');
@@ -8,7 +10,11 @@ export default function Items() {
 
   const { items, setItems } = useItems();
 
-  // TODO -- redirect the user back to auth if there is not a current user
+  const { user } = useUserContext();
+
+  if (!user) {
+    return <Redirect to="/auth/sign-in" />;
+  }
 
   const handleClick = async (item) => {
     try {
@@ -35,39 +41,40 @@ export default function Items() {
   };
 
   return (
-    <div className="box m-5">
+    <section className="things">
       {items.map((item) => (
         <div key={item.id}>
           <label className="checkbox">
             <input
-              className="m-1"
+              className="checkbox-input"
               type="checkbox"
-              checked={item.purchased}
+              checked={ item.purchased }
+              readOnly
               onClick={() => handleClick(item)}
             />
             {item.qty} {item.name}
           </label>
         </div>
       ))}
-      <div className="field is-grouped m-2">
+      <div className="field">
         <input
-          className="input m-2"
+          className="item-input"
           type="text"
           placeholder="new item"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <input
-          className="input m-2"
+          className="qty-input"
           type="number"
           placeholder="qty"
           value={qty}
           onChange={(e) => setQty(Number(e.target.value))}
         />
-        <button className="button is-primary m-2" onClick={handleNewItem}>
+        <button className="addItem" onClick={handleNewItem}>
           Add
         </button>
       </div>
-    </div>
+    </section>
   );
 }
